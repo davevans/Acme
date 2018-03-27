@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  com.api:
+    image: comapi
+    build:
+      context: .
+      dockerfile: Com.Api/Dockerfile
