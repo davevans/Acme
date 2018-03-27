@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,7 +13,9 @@ namespace Com.Api.Controllers
         {
             var httpClient = new HttpClient();
 
-            var result = await httpClient.GetStringAsync($"api/add/{value}");
+            var uri = $"http://{Environment.GetEnvironmentVariable("backend")}/";
+
+            var result = await httpClient.GetStringAsync($"{uri}api/add/{value}");
 
             return result;
         }

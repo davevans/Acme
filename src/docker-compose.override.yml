@@ -4,6 +4,7 @@ services:
   com.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - backend=com.api.backend
     ports:
       - "80"
 
