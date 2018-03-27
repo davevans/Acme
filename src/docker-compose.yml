@@ -11,5 +11,5 @@ services:
     image: comapibackend
     build:
       context: .
-      dockerfile: ../Com.Api.Backend/Dockerfile
+      dockerfile: Com.Api.Backend/Dockerfile
 
