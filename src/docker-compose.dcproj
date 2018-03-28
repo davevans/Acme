@@ -5,7 +5,7 @@
     <DockerTargetOS>Linux</DockerTargetOS>
     <ProjectGuid>94d414dc-2d0f-4b73-ac21-a030562aa231</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
-    <DockerServiceUrl>http://localhost:{ServicePort}/api/values</DockerServiceUrl>
+    <DockerServiceUrl>http://localhost:{ServicePort}/api/values/1</DockerServiceUrl>
     <DockerServiceName>com.api</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
