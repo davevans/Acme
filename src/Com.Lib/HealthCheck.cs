@@ -11,7 +11,7 @@ namespace Com.Lib
         {
             Task.Run(() =>
             {
-                Thread.Sleep(10000);
+                Thread.Sleep(30000);
 
                 _isReady = true;
             });
