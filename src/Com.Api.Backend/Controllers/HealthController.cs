@@ -10,10 +10,7 @@ namespace Com.Api.Backend.Controllers
         [HttpGet]
         public IActionResult IsHealthy()
         {
-            if (_isHealthy)
-                return new OkResult();
-
-            return new StatusCodeResult(500);
+            return _isHealthy ? new OkResult() : new StatusCodeResult(500);
         }
 
         [HttpGet("{value}")]
