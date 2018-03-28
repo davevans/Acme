@@ -1,0 +1,77 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: commapi
+spec:
+  template:
+    metadata:
+      labels:
+        app: commapi
+        tier: frontend
+    spec:
+      containers:
+      - name: commapi
+        image: csectradingdev.azurecr.io/commapi
+        imagePullPolicy: Always
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Production
+        - name: backend
+          value: commapi-backend
+        ports:
+        - containerPort: 80
+      # imagePullSecrets:
+      # - name: pull-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: commapi
+    tier: frontend
+  name: commapi
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+  selector:
+    app: commapi
+    tier: frontend
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: commapi-backend
+spec:
+  template:
+    metadata:
+      labels:
+        app: commapi
+        tier: backend
+    spec:
+      containers:
+      - name: commapi
+        image: csectradingdev.azurecr.io/commapibackend
+        imagePullPolicy: Always
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Production
+        ports:
+        - containerPort: 80
+      # imagePullSecrets:
+      # - name: pull-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: commapi
+    tier: backend
+  name: commapi-backend
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+  selector:
+    app: commapi
+    tier: backend
