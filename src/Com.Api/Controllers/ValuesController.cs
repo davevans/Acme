@@ -9,7 +9,7 @@ namespace Com.Api.Controllers
     public class ValuesController : Controller
     {
         private readonly string _backend;
-
+         
         public ValuesController(Backend backend) => _backend = backend.DnsName;
 
         [HttpGet("{value}")]

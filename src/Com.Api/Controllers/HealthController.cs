@@ -1,19 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Com.Lib;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Com.Api.Controllers
 {
     [Route("api/[controller]")]
     public class HealthController
     {
+        private readonly HealthCheck _healthCheck;
         private static bool _isHealthy;
 
-        [HttpGet]
+        public HealthController(HealthCheck healthCheck)
+        {
+            _healthCheck = healthCheck;
+        }
+
+        [HttpGet("ready")]
         public IActionResult IsHealthy()
         {
-            if (_isHealthy)
-                return new OkResult();
+            return _healthCheck.IsReady() && _isHealthy ? new OkResult() : new StatusCodeResult(500);
+        }
 
-            return new StatusCodeResult(500);
+        [HttpGet("live")]
+        public IActionResult IsReady()
+        {
+            return _healthCheck.IsReady() ? new OkResult() : new StatusCodeResult(503);
         }
 
         [HttpGet("{value}")]
