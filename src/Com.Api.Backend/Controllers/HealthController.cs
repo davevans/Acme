@@ -7,7 +7,7 @@ namespace Com.Api.Backend.Controllers
     public class HealthController
     {
         private readonly HealthCheck _healthCheck;
-        private static bool _isHealthy;
+        private static bool _isHealthy = true;
 
         public HealthController(HealthCheck healthCheck)
         {
