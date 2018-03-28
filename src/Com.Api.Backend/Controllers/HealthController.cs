@@ -17,7 +17,7 @@ namespace Com.Api.Backend.Controllers
         [HttpGet("ready")]
         public IActionResult IsHealthy()
         {
-            return _healthCheck.IsReady() && _isHealthy ? new OkResult() : new StatusCodeResult(500);
+            return _healthCheck.IsReady() && _isHealthy ? new OkResult() : new StatusCodeResult(503);
         }
 
         [HttpGet("live")]
