@@ -15,23 +15,19 @@ namespace Com.Api.Controllers
         }
 
         [HttpGet("ready")]
-        public IActionResult IsHealthy()
-        {
-            return _healthCheck.IsReady() && _isHealthy ? new OkResult() : new StatusCodeResult(503);
-        }
+        public IActionResult IsHealthy() => GetResponse(_healthCheck.IsReady() && _isHealthy);
 
         [HttpGet("live")]
-        public IActionResult IsReady()
-        {
-            return _healthCheck.IsReady() ? new OkResult() : new StatusCodeResult(503);
-        }
+        public IActionResult IsReady() => GetResponse(_healthCheck.IsReady());
 
-        [HttpGet("{value}")]
+        [HttpGet("update/{value}")]
         public IActionResult Health(bool value)
         {
             _isHealthy = value;
 
             return new OkResult();
         }
+
+        private static IActionResult GetResponse(bool status) => status ? new OkResult() : new StatusCodeResult(503);
     }
 }
