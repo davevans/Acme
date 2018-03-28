@@ -12,17 +12,16 @@ namespace Com.Api.Controllers
 
         public ValuesController(Backend backend) => _backend = backend.DnsName;
 
-        [HttpGet]
-        [HttpPost("{value}")]
+        [HttpGet("{value}")]
         public async Task<string> Get(int value)
         {
             var httpClient = new HttpClient();
 
             var url = $"http://{_backend}/api/add/{value}";
 
-            var result = await httpClient.GetStringAsync(url);
+            var result = await httpClient.GetAsync(url);
 
-            return result;
+            return await result.Content.ReadAsStringAsync();
         }
     }
 }
