@@ -8,15 +8,19 @@ namespace Com.Api.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
+        private readonly string _backend;
+
+        public ValuesController(Backend backend) => _backend = backend.DnsName;
+
         [HttpGet]
         [HttpPost("{value}")]
         public async Task<string> Get(int value)
         {
             var httpClient = new HttpClient();
 
-            var uri = $"http://{Environment.GetEnvironmentVariable("backend")}/";
+            var url = $"http://{_backend}/api/add/{value}";
 
-            var result = await httpClient.GetStringAsync($"{uri}api/add/{value}");
+            var result = await httpClient.GetStringAsync(url);
 
             return result;
         }
