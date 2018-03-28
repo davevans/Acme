@@ -9,6 +9,7 @@ namespace Com.Api.Controllers
     public class ValuesController : Controller
     {
         [HttpGet]
+        [HttpPost("{value}")]
         public async Task<string> Get(int value)
         {
             var httpClient = new HttpClient();

@@ -5,8 +5,8 @@ namespace Com.Api.Backend.Controllers
     [Route("api/[controller]")]
     public class AddController : Controller
     {
-        [HttpGet]
-        public int Get(int value)
+        [HttpPost("{value}")]
+        public int Post(int value)
         {
             return value + 5;
         }
